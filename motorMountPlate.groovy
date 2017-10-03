@@ -17,8 +17,9 @@ double vexSquare = 0.182
 
 CSG gear =Vitamins.get("vexGear","36T")
 		.difference(motor)
-		.roty(180)
+		//.roty(180)
 		.toZMin()
+		
 CSG mesh = Vitamins.get("vexGear","HS12T")
 			.difference(vshaft)
 			
@@ -56,5 +57,8 @@ mountPlate.setMfg( {toMfg ->
 		toMfg.rotx(180)
 			.toZMin()
 })
-				
+gear.setMfg( {toMfg ->
+		toMfg.rotx(180)
+			.toZMin()
+})				
 return [motor,gear,mesh,spacer,mountPlate]

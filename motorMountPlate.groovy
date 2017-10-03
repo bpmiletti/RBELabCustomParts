@@ -15,7 +15,7 @@ CSG vshaft =  (CSG)ScriptingEngine
 double vexHoleSpacing = 0.5*25.4
 double vexSquare = 0.182
 
-CSG gear =Vitamins.get("vexGear","HS36T")
+CSG gear =Vitamins.get("vexGear","36T")
 		.difference(motor)
 		.roty(180)
 		.toZMin()

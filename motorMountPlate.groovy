@@ -1,3 +1,8 @@
+double screwHeightOfset = 1.0/8.0*25.4
+CSGDatabase.clear()
+LengthParameter printerOffset = new LengthParameter("printerOffset",0.25,[2,0.001])
+printerOffset.setMM(0.25);
+
 motor=(CSG)ScriptingEngine
 	                    .gitScriptRun(
                                 "https://github.com/WPIRoboticsEngineering/RBELabCustomParts.git", // git location of the library
@@ -14,11 +19,13 @@ CSG vshaft =  (CSG)ScriptingEngine
                         )				
 double vexHoleSpacing = 0.5*25.4
 double vexSquare = 0.182
-
+CSG screwKeepaway =new Cylinder(5,5,screwHeightOfset,(int)30).toCSG() // a one line Cylinder
 CSG gear =Vitamins.get("vexGear","36T")
-		.difference(motor)
 		//.roty(180)
 		.toZMin()
+		.movez(screwHeightOfset)
+		.union(screwKeepaway)
+		.difference(motor)
 		
 CSG mesh = Vitamins.get("vexGear","HS12T")
 			.difference(vshaft)
@@ -61,4 +68,4 @@ gear.setMfg( {toMfg ->
 		toMfg.rotx(180)
 			.toZMin()
 })				
-return [motor,gear,mesh,spacer,mountPlate]
+return [gear,motor,new Cylinder(3,3,10,(int)30).toCSG()]
